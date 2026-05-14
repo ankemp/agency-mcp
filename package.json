@@ -1,0 +1,25 @@
+{
+  "name": "agency-mcp",
+  "version": "1.0.0",
+  "description": "JIT Agent Router — an MCP server for searching and retrieving AI agent prompts from GitHub repos",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "agency-mcp": "dist/index.js"
+  },
+  "scripts": {
+    "prepare": "tsc",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "^2.0.0-alpha.2",
+    "fuse.js": "^7.1.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.17",
+    "typescript": "^5.8.3"
+  }
+}

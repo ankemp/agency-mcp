@@ -1,0 +1,37 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
+
+      - name: Download dist artifact
+        uses: dawidd6/action-download-artifact@b6e2e70617bc3265edd6dab6c906732b2f1ae151 # v21
+        with:
+          github_token: ${{ github.token }}
+          workflow: ci.yml
+          branch: main
+          name: dist-${{ github.sha }}
+          path: dist/
+          if_no_artifact_found: fail
+
+      - name: Commit dist to release tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f dist/
+          git commit -m "chore: add dist for ${{ github.ref_name }}"
+          git tag -f ${{ github.ref_name }}
+          git push -f origin ${{ github.ref_name }}
