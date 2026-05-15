@@ -14,7 +14,8 @@
     "dev": "tsc --watch"
   },
   "dependencies": {
-    "@modelcontextprotocol/server": "^2.0.0-alpha.2",
+    "@cfworker/json-schema": "^4.1.1",
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "fuse.js": "^7.1.0",
     "zod": "^4.4.3"
   },
